@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ஆண்டு 4 - திருக்குறள்</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL NEON THEME --- */
+        :root {
+            --bg-color: #0d0d12;
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00e0;
+            --neon-green: #39ff14;
+            --neon-orange: #ff9900;
+            --neon-purple: #b800ff;
+            --card-bg: #1a1a24;
+            --text-main: #f0f0f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Tamil', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: rgba(13, 13, 18, 0.9);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 224, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .kpm-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-name {
+            color: var(--neon-pink);
+            font-size: 26px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            margin-top: 120px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            font-size: 50px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+            font-family: 'Orbitron', 'Noto Sans Tamil', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        /* --- 3D STACKING KURAL CARDS --- */
+        .kural-stack-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px 100px 30px;
+            position: relative;
+        }
+
+        .kural-card {
+            background: linear-gradient(145deg, #1a1a24, #121219);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 80px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.9);
+            position: sticky;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .kural-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Card Themes */
+        .card-1 { --card-theme: var(--neon-blue); top: 120px; z-index: 1; border-top: 5px solid var(--neon-blue); box-shadow: 0 -5px 25px rgba(0, 243, 255, 0.2); }
+        .card-2 { --card-theme: var(--neon-green); top: 140px; z-index: 2; border-top: 5px solid var(--neon-green); box-shadow: 0 -5px 25px rgba(57, 255, 20, 0.2); }
+        .card-3 { --card-theme: var(--neon-pink); top: 160px; z-index: 3; border-top: 5px solid var(--neon-pink); box-shadow: 0 -5px 25px rgba(255, 0, 224, 0.2); }
+        .card-4 { --card-theme: var(--neon-orange); top: 180px; z-index: 4; border-top: 5px solid var(--neon-orange); box-shadow: 0 -5px 25px rgba(255, 153, 0, 0.2); }
+        .card-5 { --card-theme: var(--neon-purple); top: 200px; z-index: 5; border-top: 5px solid var(--neon-purple); box-shadow: 0 -5px 25px rgba(184, 0, 255, 0.2); }
+
+        .kural-number {
+            position: absolute;
+            top: -25px;
+            left: 40px;
+            background: var(--bg-color);
+            padding: 5px 20px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            border: 2px solid var(--card-theme);
+            color: var(--card-theme);
+            box-shadow: 0 0 10px var(--card-theme);
+            z-index: 10;
+        }
+
+        .kural-text {
+            font-size: 25px;
+            color: #fff;
+            text-align: left;
+            padding-left: 20px;
+            line-height: 1.8;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+            margin-top: 30px;
+            white-space: nowrap;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .kural-text::-webkit-scrollbar { height: 4px; }
+        .kural-text::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+        .neon-divider {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            margin: 15px 0;
+        }
+
+        .kural-meaning {
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.8;
+            text-align: left;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--card-theme);
+        }
+
+        /* --- AUDIO SECTION (ஒலிநாடா) --- */
+        .audio-section-container {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .audio-header {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .audio-card {
+            background: linear-gradient(145deg, #121219, #0d0d12);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+        }
+
+        .audio-track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .audio-track-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .audio-track-subtitle {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .audio-controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+        }
+
+        .play-btn {
+            background: var(--neon-blue);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: #000;
+            cursor: pointer;
+            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px var(--neon-blue);
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--neon-blue);
+        }
+
+        .visualizer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 40px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .bubble {
+            width: 12px;
+            height: 12px;
+            background: #444;
+            border-radius: 50%;
+            transition: 0.2s ease;
+        }
+
+        .visualizer.active .bubble {
+            background: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            animation: bounceBubble 0.8s infinite alternate ease-in-out;
+        }
+
+        .visualizer.active .bubble:nth-child(1) { animation-delay: 0.1s; animation-duration: 0.6s; }
+        .visualizer.active .bubble:nth-child(2) { animation-delay: 0.3s; animation-duration: 0.9s; }
+        .visualizer.active .bubble:nth-child(3) { animation-delay: 0s;   animation-duration: 0.7s; }
+        .visualizer.active .bubble:nth-child(4) { animation-delay: 0.4s; animation-duration: 0.5s; }
+        .visualizer.active .bubble:nth-child(5) { animation-delay: 0.2s; animation-duration: 0.8s; }
+        .visualizer.active .bubble:nth-child(6) { animation-delay: 0.5s; animation-duration: 0.6s; }
+        .visualizer.active .bubble:nth-child(7) { animation-delay: 0.1s; animation-duration: 0.9s; }
+        .visualizer.active .bubble:nth-child(8) { animation-delay: 0.3s; animation-duration: 0.7s; }
+        .visualizer.active .bubble:nth-child(9) { animation-delay: 0s;   animation-duration: 0.5s; }
+
+        @keyframes bounceBubble {
+            0% { transform: translateY(12px) scale(0.8); opacity: 0.6; }
+            100% { transform: translateY(-12px) scale(1.2); opacity: 1; }
+        }
+
+        /* --- DIGITAL GAMES (மின்னியல் விளையாட்டுகள்) PEAK GRAPHICS --- */
+        .games-header {
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .games-section-container {
+            max-width: 1000px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .game-card {
+            background: linear-gradient(145deg, rgba(20, 20, 30, 0.9), rgba(10, 10, 15, 0.9));
+            width: 280px;
+            border-radius: 25px;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(15px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .game-card.game-1 { --game-color: var(--neon-blue); border-top: 2px solid var(--neon-blue); }
+        .game-card.game-2 { --game-color: var(--neon-pink); border-top: 2px solid var(--neon-pink); }
+        .game-card.game-3 { --game-color: var(--neon-green); border-top: 2px solid var(--neon-green); }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 27px;
+            background: linear-gradient(45deg, transparent, var(--game-color), transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: 0.5s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 40px rgba(var(--game-color), 0.4);
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        .game-icon {
+            font-size: 60px;
+            line-height: 1;
+            filter: drop-shadow(0 0 15px var(--game-color));
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .game-card.game-2 .game-icon { animation-delay: 0.5s; }
+        .game-card.game-3 .game-icon { animation-delay: 1s; }
+
+        .game-title {
+            color: #fff;
+            font-size: 22px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .game-desc {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .neon-play-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--game-color);
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 12px 35px;
+            border: 2px solid var(--game-color);
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .neon-play-btn:hover {
+            background: var(--game-color);
+            color: #000;
+            box-shadow: 0 0 25px var(--game-color), inset 0 0 10px rgba(255,255,255,0.8);
+            transform: scale(1.1);
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes borderRotate {
+            100% { filter: hue-rotate(360deg); }
+        }
+        /* --- MOBILE RESPONSIVENESS FIXES --- */
+        @media screen and (max-width: 768px) {
+            /* 1. Fix the Navigation Bar */
+            nav {
+                flex-direction: column;
+                padding: 10px;
+                gap: 15px;
+                position: relative; /* Stops it from hiding the title */
+            }
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .nav-links a {
+                margin-left: 0;
+                margin: 5px 10px;
+                font-size: 14px;
+            }
+
+            /* 2. Fix the Headers */
+            .page-header {
+                margin-top: 30px;
+                padding: 20px 10px;
+            }
+            .page-title {
+                font-size: 32px !important;
+            }
+
+            /* 3. Fix the Kural Cards */
+            .kural-stack-container {
+                padding: 0 15px 50px 15px;
+            }
+            .kural-card {
+                padding: 30px 15px 20px 15px;
+                margin-bottom: 40px;
+                position: relative; /* Stops them from getting stuck on each other on mobile */
+                top: auto !important;
+            }
+            .kural-number {
+                left: 15px;
+                top: -20px;
+                font-size: 18px;
+                padding: 5px 15px;
+            }
+            .kural-text {
+                font-size: 18px;
+                white-space: normal; /* Allows text to drop to the next line instead of scrolling */
+                overflow-x: hidden;
+            }
+            .kural-meaning {
+                font-size: 15px;
+                padding: 15px;
+            }
+
+            /* 4. Fix Audio and Game Cards */
+            .audio-controls-wrapper {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .visualizer {
+                display: none; /* Hide visualizer on small phones to save space */
+            }
+            .game-card, .exercise-card {
+                width: 100%;
+                padding: 30px 15px;
+            }
+            .game-icon {
+                font-size: 45px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo-container" onclick="window.location.href='index.html'">
+        <img src="images/KPM Logo.png" alt="KPM Logo" class="kpm-logo">
+        <span class="nav-name">பா. ஷர்வீணா</span>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">முகப்பு (Home)</a>
+        <a href="index.html#school-info">பள்ளி தகவல் (School Info)</a>
+        <a href="year4.html" style="color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue);">ஆண்டு 4</a>
+        <a href="year5.html">ஆண்டு 5</a>
+        <a href="year6.html">ஆண்டு 6</a>
+    </div>
+</nav>
+
+<header class="page-header">
+    <h1 class="page-title">ஆண்டு 4</h1>
+    <p class="page-subtitle">திருக்குறள் மற்றும் பொருள்</p>
+</header>
+
+<section class="kural-stack-container">
+    <div class="kural-card card-1">
+        <div class="kural-number">01</div>
+        <div class="kural-text">
+            வையத்துள் வாழ்வாங்கு வாழ்பவன் வானுறையும்<br>
+            தெய்வத்துள் வைக்கப் படும்.
+        </div>
+        <hr class="neon-divider">
+        <div class="kural-meaning">
+            <strong>பொருள்:</strong> உலகத்தில் வாழவேண்டிய அறநெறியில் நின்று வாழ்கின்றவன், வானுலகத்திலுள்ள தெய்வத்தோடு சேர்த்து மதிக்கப்படுவான்.
+        </div>
+    </div>
+
+    <div class="kural-card card-2">
+        <div class="kural-number">02</div>
+        <div class="kural-text">
+            தோன்றின் புகழொடு தோன்றுக அஃதிலார்<br>
+            தோன்றலின் தோன்றாமை நன்று.
+        </div>
+        <hr class="neon-divider">
+        <div class="kural-meaning">
+            <strong>பொருள்:</strong> ஒரு துறையைச் சார்ந்து இருக்க எண்ணங்கொண்டவர்கள் அத்துறையில் பிறர் புகழும்படியாகச் சிறந்து விளங்க வேண்டும். இல்லையேல் அத்துறையில் ஈடுபடாதிருத்தல் நல்லது.
+        </div>
+    </div>
+
+    <div class="kural-card card-3">
+        <div class="kural-number">03</div>
+        <div class="kural-text">
+            புகழ்பட வாழாதார் தந்நோவார் தம்மை<br>
+            இகழ்வாரை நோவது எவன்.
+        </div>
+        <hr class="neon-divider">
+        <div class="kural-meaning">
+            <strong>பொருள்:</strong> தமக்குப் புகழ் உண்டாகுமாறு வாழ முடியாதவர் தம்மைத் தாமே நொந்து கொள்ளாமல், தம்மை இகழ்கின்றவரை நொந்து கொள்வதால் பயனில்லை.
+        </div>
+    </div>
+
+    <div class="kural-card card-4">
+        <div class="kural-number">04</div>
+        <div class="kural-text">
+            தொட்டனைத் தூறும் மணற்கேணி மாந்தர்க்குக்<br>
+            கற்றனைத் தூறும் அறிவு.
+        </div>
+        <hr class="neon-divider">
+        <div class="kural-meaning">
+            <strong>பொருள்:</strong> எந்த அளவுக்குத் தோண்டுகின்றோமோ அந்த அளவுக்கு நீர் மணற்கேணியில் ஊறும். அதுபோல எந்த அளவுக்குக் கல்வி கற்கிறோமோ அந்த அளவுக்கு அறிவு வளரும்.
+        </div>
+    </div>
+
+    <div class="kural-card card-5">
+        <div class="kural-number">05</div>
+        <div class="kural-text">
+            அன்பிற்கும் உண்டோ அடைக்குந்தாழ் ஆர்வலர்<br>
+            புன்கண்நீர் பூசல் தரும்.
+        </div>
+        <hr class="neon-divider">
+        <div class="kural-meaning">
+            <strong>பொருள்:</strong> அன்புக்கு அடைத்து வைக்கும் தாழ் எதுவும் உண்டோ? அன்புடையாரின் சிறு கண்ணீரே அவர் அன்பினைப் பலர் அறிய வெளிப்படுத்திவிடும்.
+        </div>
+    </div>
+</section>
+
+<header class="page-header audio-header">
+    <h2 class="page-title" style="font-size: 40px; color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue);">ஒலிநாடா</h2>
+    <p class="page-subtitle">குரல் வழி பதிவு</p>
+</header>
+
+<section class="audio-section-container">
+    <div class="audio-card">
+        <div class="audio-track-info">
+            <span class="audio-track-title">ஆண்டு 4 - திருக்குறள் வாசிப்பு</span>
+            <span class="audio-track-subtitle">குரல்: பா. ஷர்வீணா</span>
+        </div>
+
+        <div class="audio-controls-wrapper">
+            <audio id="main-audio" src="four.mp3"></audio>
+
+            <button class="play-btn" onclick="togglePlay('main-audio', this)">
+                ▶
+            </button>
+
+            <div class="visualizer">
+                <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+                <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+                <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<header class="page-header games-header">
+    <h2 class="page-title" style="font-size: 40px; color: var(--neon-purple); text-shadow: 0 0 15px var(--neon-purple);">மின்னியல் விளையாட்டுகள்</h2>
+    <p class="page-subtitle">கற்றுக்கொண்டதை விளையாடிப் பார்ப்போம்!</p>
+</header>
+
+<section class="games-section-container">
+    <div class="game-card game-1">
+        <div class="game-icon">🚀</div>
+        <div class="game-title">விளையாட்டு 1</div>
+        <div class="game-desc">திருக்குறளைச் சரியாக இணைத்து உங்கள் திறனைச் சோதியுங்கள்.</div>
+        <a href="https://wordwall.net/resource/112530156" target="_blank" class="neon-play-btn">Play</a>
+    </div>
+
+    <div class="game-card game-2">
+        <div class="game-icon">🎯</div>
+        <div class="game-title">விளையாட்டு 2</div>
+        <div class="game-desc">சரியான பொருளைக் கண்டுபிடித்து இலக்கை அடையுங்கள்.</div>
+        <a href="https://wordwall.net/resource/112530565" target="_blank" class="neon-play-btn">Play</a>
+    </div>
+
+    <div class="game-card game-3">
+        <div class="game-icon">🕹️</div>
+        <div class="game-title">விளையாட்டு 3</div>
+        <div class="game-desc">விடுபட்ட சொற்களைக் கண்டுபிடித்து குறளை முழுமையாக்குங்கள்.</div>
+        <a href="https://wordwall.net/resource/112530727" target="_blank" class="neon-play-btn">Play</a>
+    </div>
+</section>
+
+<script>
+    function togglePlay(audioId, btnElement) {
+        const audio = document.getElementById(audioId);
+        const visualizer = btnElement.nextElementSibling;
+
+        if (audio.paused) {
+            audio.play();
+            btnElement.innerHTML = '⏸';
+            visualizer.classList.add('active');
+        } else {
+            audio.pause();
+            btnElement.innerHTML = '▶';
+            visualizer.classList.remove('active');
+        }
+
+        audio.onended = function () {
+            btnElement.innerHTML = '▶';
+            visualizer.classList.remove('active');
+        };
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>திருக்குறள் மையம் - மகிழம்பூ தமிழ்ப்பள்ளி</title>
+  <!-- Importing Tamil and English Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- GLOBAL NEON THEME --- */
+    :root {
+      --bg-color: #0d0d12;
+      --neon-blue: #00f3ff;
+      --neon-pink: #ff00e0;
+      --neon-green: #39ff14;
+      --card-bg: #1a1a24;
+      --text-main: #f0f0f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans Tamil', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Orbitron', 'Noto Sans Tamil', sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      background: rgba(13, 13, 18, 0.9);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 2px solid var(--neon-blue);
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    }
+
+    .nav-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+    }
+
+    .kpm-logo {
+      height: 50px;
+      width: auto;
+      animation: logoPulse 3s infinite alternate;
+      transition: transform 0.3s ease;
+    }
+
+    .kpm-logo:hover {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .nav-name {
+      color: var(--neon-blue);
+      font-size: 26px;
+      font-weight: bold;
+      text-shadow: 0 0 10px var(--neon-blue);
+      animation: textPulse 2s infinite alternate;
+    }
+
+    @keyframes logoPulse {
+      0% { filter: drop-shadow(0 0 5px var(--neon-blue)); }
+      100% { filter: drop-shadow(0 0 15px var(--neon-green)); }
+    }
+
+    @keyframes textPulse {
+      0% { text-shadow: 0 0 5px var(--neon-blue); }
+      100% { text-shadow: 0 0 20px var(--neon-pink); color: #fff; }
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 30px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--neon-pink);
+      text-shadow: 0 0 10px var(--neon-pink);
+    }
+
+    /* --- HOME SECTION & HERO IMAGE (FIXED NO EMPTY SPACES) --- */
+    .home-section {
+      padding: 140px 50px 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(0,243,255,0.1) 0%, transparent 60%);
+    }
+
+    .hero-image-wrapper {
+      margin-bottom: 30px;
+      display: inline-block; /* Makes wrapper hug the image tightly */
+    }
+
+    /* Border applied directly to the image to eliminate spaces */
+    .hero-image {
+      height: 380px; /* Set a nice fixed height */
+      width: auto; /* Let the width automatically adjust so there is NO stretching and NO gaps */
+      max-width: 100%;
+      border-radius: 15px;
+      display: block;
+      border: 5px solid var(--neon-green);
+      box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+    }
+
+    /* --- NEW TEXT AREA (Below the image) --- */
+    .hero-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .home-title {
+      font-size: 55px;
+      color: var(--neon-green);
+      text-shadow: 0 0 20px rgba(57, 255, 20, 0.8);
+      margin-bottom: 0px;
+    }
+
+    .home-subtitle {
+      font-size: 26px;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    /* --- ALWAYS VISIBLE LEADERSHIP SECTION (GB IMAGE) --- */
+    .leadership-section {
+      max-width: 1000px;
+      margin: 0 auto 50px auto;
+      padding: 0 50px;
+    }
+
+    .principal-profile-visible {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding: 30px;
+      background: rgba(255, 0, 224, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 0, 224, 0.3);
+      box-shadow: 0 0 20px rgba(255, 0, 224, 0.15);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .principal-profile-visible:hover {
+      box-shadow: 0 0 30px rgba(255, 0, 224, 0.4);
+      transform: translateY(-5px);
+      background: rgba(255, 0, 224, 0.1);
+    }
+
+    .principal-img-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .principal-img-container::before {
+      content: '';
+      position: absolute;
+      top: -5px; left: -5px; right: -5px; bottom: -5px;
+      border-radius: 50%;
+      border: 4px dashed var(--neon-blue);
+      animation: spinRing 10s linear infinite;
+    }
+
+    @keyframes spinRing {
+      100% { transform: rotate(360deg); }
+    }
+
+    .principal-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--neon-pink);
+      position: relative;
+      z-index: 2;
+      background-color: #222;
+    }
+
+    .principal-details {
+      flex-grow: 1;
+    }
+
+    .principal-details h3 {
+      color: var(--neon-green);
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+    }
+
+    .principal-title {
+      color: var(--neon-pink);
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: inline-block;
+      border-bottom: 2px solid var(--neon-pink);
+      padding-bottom: 5px;
+    }
+
+    .principal-desc {
+      color: #ccc;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* --- SCHOOL INFO (EXPANDABLE CARDS) --- */
+    .school-info-section {
+      padding: 0 50px 50px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 40px;
+      color: var(--neon-blue);
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px var(--neon-blue);
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background-color: var(--card-bg);
+      border-left: 5px solid var(--neon-blue);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .info-card:hover {
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+      transform: scale(1.02);
+    }
+
+    .card-header {
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .card-header span {
+      color: var(--neon-blue);
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .card-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 30px;
+      background: rgba(0,0,0,0.3);
+      transition: max-height 0.8s ease, padding 0.5s ease;
+      line-height: 1.8;
+      color: #ccc;
+    }
+
+    .info-card.active .card-content {
+      max-height: 1000px;
+      padding: 20px 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .info-card.active .card-header span {
+      transform: rotate(45deg);
+    }
+
+    .info-card:nth-child(2) { border-color: var(--neon-green); }
+    .info-card:nth-child(2) .card-header span { color: var(--neon-green); }
+    .info-card:nth-child(2):hover { box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); }
+
+    .info-card:nth-child(3) { border-color: var(--neon-pink); }
+    .info-card:nth-child(3) .card-header span { color: var(--neon-pink); }
+    .info-card:nth-child(3):hover { box-shadow: 0 0 20px rgba(255, 0, 224, 0.4); }
+
+    .lyrics {
+      white-space: pre-line;
+      text-align: center;
+      color: var(--neon-green);
+      font-style: italic;
+    }
+    /* --- MOBILE RESPONSIVENESS FIXES --- */
+    @media screen and (max-width: 768px) {
+      /* 1. Fix the Navigation Bar */
+      nav {
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+        position: relative; /* Stops it from hiding the title */
+      }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      .nav-links a {
+        margin-left: 0;
+        margin: 5px 10px;
+        font-size: 14px;
+      }
+
+      /* 2. Fix the Headers */
+      .page-header {
+        margin-top: 30px;
+        padding: 20px 10px;
+      }
+      .page-title {
+        font-size: 32px !important;
+      }
+
+      /* 3. Fix the Kural Cards */
+      .kural-stack-container {
+        padding: 0 15px 50px 15px;
+      }
+      .kural-card {
+        padding: 30px 15px 20px 15px;
+        margin-bottom: 40px;
+        position: relative; /* Stops them from getting stuck on each other on mobile */
+        top: auto !important;
+      }
+      .kural-number {
+        left: 15px;
+        top: -20px;
+        font-size: 18px;
+        padding: 5px 15px;
+      }
+      .kural-text {
+        font-size: 18px;
+        white-space: normal; /* Allows text to drop to the next line instead of scrolling */
+        overflow-x: hidden;
+      }
+      .kural-meaning {
+        font-size: 15px;
+        padding: 15px;
+      }
+
+      /* 4. Fix Audio and Game Cards */
+      .audio-controls-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      .visualizer {
+        display: none; /* Hide visualizer on small phones to save space */
+      }
+      .game-card, .exercise-card {
+        width: 100%;
+        padding: 30px 15px;
+      }
+      .game-icon {
+        font-size: 45px !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo-container">
+    <img src="images/KPM Logo.png" alt="KPM Logo" class="kpm-logo">
+    <span class="nav-name">பா. ஷர்வீணா</span>
+  </div>
+  <div class="nav-links">
+    <a href="#home">முகப்பு (Home)</a>
+    <a href="#school-info">பள்ளி தகவல் (School Info)</a>
+    <a href="year4.html">ஆண்டு 4</a>
+    <a href="year5.html">ஆண்டு 5</a>
+    <a href="year6.html">ஆண்டு 6</a>
+  </div>
+</nav>
+
+<!-- HOME SECTION (THIRUVALLUVAR IMAGE TIGHTLY BORDERED + TEXT BELOW) -->
+<section id="home" class="home-section">
+
+  <div class="hero-image-wrapper">
+    <!-- Border is now applied straight to this image -->
+    <img src="images/tp.png" alt="Thiruvalluvar" class="hero-image" onerror="this.src='https://via.placeholder.com/300x400/1a1a24/ff00e0?text=Please+check+image+name+(tp.png)'">
+  </div>
+
+  <!-- Text is now outside the image and border completely -->
+  <div class="hero-text-wrapper">
+    <h1 class="home-title">திருக்குறள் மையம்</h1>
+    <h3 class="home-subtitle">மகிழம்பூ தமிழ்ப்பள்ளி</h3>
+  </div>
+
+</section>
+
+<!-- ALWAYS VISIBLE LEADERSHIP SECTION (GB IMAGE) -->
+<section class="leadership-section">
+  <div class="principal-profile-visible">
+    <div class="principal-img-container">
+      <img src="images/gb.png" alt="Principal GB" class="principal-img" onerror="this.src='https://via.placeholder.com/150/1a1a24/00f3ff?text=GB'">
+    </div>
+    <div class="principal-details">
+      <div class="principal-title">பள்ளியின் தலைமையாசிரியர்</div>
+      <h3>திருமதி கோகிலவாணி முனியாண்டி</h3>
+      <p class="principal-desc">
+        2020ஆம் ஆண்டிலிருந்து இப்பள்ளியை இன்று வரை சிறப்பாக வழிநடத்தி வருகிறார். இப்பள்ளி இதுவரை 11 தலைமையாசிரியர்களால் வழிநடத்தப்பட்டுள்ளது.<br><br>
+        தத்தெடுத்த தந்தையான டத்தோ ஹாஜி தாஸ்லீம் அவர்கள் இப்பள்ளியின் வளர்ச்சிக்கு அளவற்ற பங்களிப்புகளை வழங்கியுள்ளார்.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOOL INFO SECTION (EXPANDABLE CARDS) -->
+<section id="school-info" class="school-info-section">
+  <h2 class="section-title">பள்ளி தகவல்</h2>
+
+  <div class="cards-container">
+
+    <!-- Card 1: Stats -->
+    <div class="info-card">
+      <div class="card-header">
+        புள்ளிவிவரங்கள் (Statistics) <span>+</span>
+      </div>
+      <div class="card-content">
+        <p><strong>பள்ளி எண்:</strong> 05-2829578</p>
+        <p><strong>ஆசிரியர் எண்ணிக்கை:</strong> 22</p>
+        <p><strong>மாணவர் எண்ணிக்கை:</strong> 247</p>
+      </div>
+    </div>
+
+    <!-- Card 2: History -->
+    <div class="info-card">
+      <div class="card-header">
+        பள்ளி வரலாறு (History) <span>+</span>
+      </div>
+      <div class="card-content">
+        <p>மகிழம்பூ தமிழ்ப்பள்ளி 1938ஆம் ஆண்டு கம்பூங் பாரு மகிழம்பூவில் 36 மாணவர்களுடன் தொடங்கப்பட்டது.</p>
+        <br>
+        <p>1956ஆம் ஆண்டு முன்னாள் பொது வேலைத் துறை அமைச்சர் யு.பி. துன் வி.டி. சம்பந்தன் அவர்கள் அடிக்கல் நாட்டினார்.</p>
+        <br>
+        <p>29.9.1957 அன்று முன்னாள் மந்திரி பெசார் யாங் அமாட் பெர்ஹோர்மாட் காஜாலி பின் ஹாஜி ஜாவி அவர்கள் பள்ளியைத் திறந்து வைத்தார்.</p>
+      </div>
+    </div>
+
+    <!-- Card 3: New Building -->
+    <div class="info-card">
+      <div class="card-header">
+        புதிய கட்டிடம் (New Building) <span>+</span>
+      </div>
+      <div class="card-content">
+        <p>20.2.2020 அன்று இப்பள்ளி புதிய கட்டிடத்தில் செயல்படத் தொடங்கியது.</p>
+        <p>தற்போது, இப்பள்ளியில் 247 மாணவர்கள், 22 ஆசிரியர்கள் மற்றும் 4 பணியாளர்கள் உள்ளனர்.</p>
+      </div>
+    </div>
+
+    <!-- Card 4: Achievements -->
+    <div class="info-card">
+      <div class="card-header">
+        சாதனைகள் மற்றும் முன்பள்ளி (Achievements) <span>+</span>
+      </div>
+      <div class="card-content">
+        <p>சுதந்திரத்திற்குப் பிறகு 69 ஆண்டுகளாக இயங்கி வரும் இப்பள்ளி, வாழ்க்கையில் சிறந்து விளங்கும் பல முன்னாள் மாணவர்களை உருவாக்கியுள்ளது.</p>
+        <p>இப்பள்ளியில் 50 மாணவர்கள் கொள்ளளவு கொண்ட முன்பள்ளியும் உள்ளது.</p>
+        <br>
+        <p>உள்ளூர் சமூகத்தின் ஒருங்கிணைந்த ஒத்துழைப்புடன், மகிழம்பூ தமிழ்ப்பள்ளி மேலும் சிறந்து விளங்கும் நோக்கில் முன்னேறி வருகிறது. <strong style="color: var(--neon-green);">“Success is Ours”</strong> என்ற கோஷத்துடன் பல துறைகளில் சாதனைகள் படைத்து வருகிறது.</p>
+      </div>
+    </div>
+
+    <!-- Card 5: Song -->
+    <div class="info-card">
+      <div class="card-header">
+        பள்ளிப் பாடல் (School Song) <span>+</span>
+      </div>
+      <div class="card-content">
+        <div class="lyrics">
+          மங்களத் தமிழ்ப்பள்ளி
+
+          எங்கள்
+          மகிழம்பூ தமிழ்ப்பள்ளி (X2)
+
+          அமுதாம் தமிழ்மொழி
+          அறிவொளி அறநெறி
+          அழகுடை மலேசியம்
+          ஆங்கிலம் அருளிடும்..மங்கள
+
+          ஆசுகள் அகற்றிடும்
+          ஆசிரிய(ர்), எம்மை
+          நேசித்து நிதம் நிதம்
+          நீதிகள் புகட்டிடும்...மங்கள்
+
+          தாய்தனைப் பேணவும்
+          தந்தையைப் பேணவும்
+          தாய் நாடு பேணவும்
+          தகவோடு
+          போதிக்கும்...மங்கள
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JAVASCRIPT FOR ANIMATIONS -->
+<script>
+  const cards = document.querySelectorAll('.info-card');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      if(card.classList.contains('active')) {
+        card.classList.remove('active');
+      } else {
+        cards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+      }
+    });
+  });
+</script>
+</body>
+</html>
